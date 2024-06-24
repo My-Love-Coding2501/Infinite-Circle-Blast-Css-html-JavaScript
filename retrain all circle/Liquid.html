@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Blast</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="circle" id="circle"></div>
+    </div>
+
+    <svg>
+        <defs>
+            <filter id="goo">
+         <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="
+                    1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 20 -10" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+    
+
+    <script>
+        const circle = document.getElementById('circle');
+
+circle.addEventListener('click', () => {
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = `${circle.offsetLeft + 25}px`;
+        particle.style.top = `${circle.offsetTop + 25}px`;
+
+        // Random direction for particles
+        const angle = Math.random() * 10 * Math.PI;
+        const distance = 300;
+        const x = distance * Math.cos(angle);
+        const y = distance * Math.sin(angle);
+
+        // Using CSS variables to pass x and y to the animation
+        particle.style.setProperty('--x', `${x}px`);
+        particle.style.setProperty('--y', `${y}px`);
+
+        document.body.appendChild(particle);
+
+        // Remove particle after animation
+        particle.addEventListener('animationend', () => {
+            particle.remove();
+        });
+    }
+});
+
+    </script>
+</body>
+</html>

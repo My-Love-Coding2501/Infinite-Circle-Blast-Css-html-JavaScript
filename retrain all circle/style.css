@@ -1,0 +1,68 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f0f0;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    filter: url('#goo');
+}
+
+.circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #00f;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+   background-color: #00f;
+    border-radius: 50%;
+    opacity: 0;
+    margin-left: 39.5%;
+    margin-top: 14.3%;
+    cursor: pointer;
+    animation: animate 2s ease infinite;
+}
+
+@keyframes animate {
+    0%, 100% {
+        opacity: 1;
+        transform: translate(0, 0);
+       }
+    25% {
+        opacity: 1;
+        transform: translate(var(--x), var(--y) * 20);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(var(--x), var(--y));
+    }
+    75% {
+        opacity: 1;
+        transform: translate(var(--x) * 20, var(--y));
+    }
+}
+
+
+/* Gooey filter */
+svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
